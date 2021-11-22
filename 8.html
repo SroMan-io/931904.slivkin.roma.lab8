@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Frontend Task №8</title>
+	<style>
+body {
+	margin:0;
+	font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+	margin:0;
+}
+	</style>
+	
+</head>
+
+
+<body>
+
+<script>
+
+function createEl(){
+
+	var scr = document.script;
+	var but = document.getElementById("but1");
+	var elem = document.createElement('div'); 
+	elem.className = "tab";
+	var inp1 = document.createElement('input');
+	var inp2 = document.createElement('input');	
+	var but1 = document.createElement('button');
+	var but2 = document.createElement('button');
+	var but3 = document.createElement('button');
+		
+	but1.onclick = function() {
+		
+		par = this.parentNode;
+		prev = par.previousElementSibling;	
+		prev1 = prev.previousElementSibling;
+		
+		if (prev1 != scr) par.after(prev);
+	}
+						
+	but2.onclick = function() {
+			
+		par = this.parentNode;	
+		prev = par.nextElementSibling;	
+		
+		if (prev != but) par.before(prev);	
+	}
+	
+	but3.onclick = function() {
+
+		par = this.parentNode;	
+		par.remove();	
+	}
+		
+	but1.textContent = '↑';
+	but2.textContent = '↓';
+	but3.textContent = 'х';
+	
+	elem.append(inp1);
+	elem.append(inp2);
+	elem.append(but1);
+	elem.append(but2);
+	elem.append(but3);
+	but.before(elem);
+};
+
+
+function summ(){
+
+	divs = document.querySelectorAll('.tab');
+	var but = document.getElementById("but1");
+	
+	x = " ";
+	x+='{';
+	
+	for (let elem of divs){
+	
+		ins = elem.querySelectorAll('input');
+		
+		x+='"';
+		x+= ins[0].value;
+		x+='"';
+		
+		x+=':';
+		
+		x+='"';
+		x+= ins[1].value;
+		x+='"';
+		
+		if (elem.nextElementSibling != but)	x+=',';				
+	}	
+	x+='}';
+	
+	var textt = document.getElementById("n1");
+	textt.textContent = x;	
+}
+
+</script>
+
+<button id = "but1" onclick = "createEl()">Добавить элемент</button><br/>
+<button onclick = "summ()">Сохранить</button>
+<div id = "n1"></div>
+
+</body>
+</html>
